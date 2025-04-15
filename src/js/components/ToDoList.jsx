@@ -1,19 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ToDos = () => {
 
     const [input, setInput] = useState("");
     const [tareas, setToDos] = useState([])
 
+
+    const createUser = () => {
+        fetch('https://playground.4geeks.com/todo/users/JesusAlos13', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+
+    };
+
+    const createToDo = (tarea) => {
+        fetch('https://playground.4geeks.com/todo/users/JesusAlos13', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                label: tarea,
+                is_done: false
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    useEffect(() => {
+        createUser();
+    }, []);
+
+
     const handleKeyDown = (e) => {
+
         if (e.key === "Enter") {
 
             if (tareas.includes(input.trim())) {
-                alert("Ya esta en la lista.")
+                alert("Ya esta en la lista.");
             } else {
 
                 setToDos([...tareas, input.trim()])
                 setInput("");
+
+                createToDo(input.trim());
             }
         }
     }
