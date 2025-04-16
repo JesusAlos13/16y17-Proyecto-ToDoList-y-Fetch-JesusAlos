@@ -22,7 +22,7 @@ const ToDos = () => {
     };
 
     const createToDo = (tarea) => {
-        fetch('https://playground.4geeks.com/todo/users/JesusAlos13', {
+        fetch('https://playground.4geeks.com/todo/todos/JesusAlos13', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
